@@ -90,6 +90,7 @@ from regcore.views import (
 
 urlpatterns = urlpatterns + [
     path("v2/", include([
+        path("", include('regcore.search.urls')),
         path("", PartsView.as_view()),
         path("title/<title>/part/<name>", PartsView.as_view()),
         path("<date>", EffectiveTitlesView.as_view()),
