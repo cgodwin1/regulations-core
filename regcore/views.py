@@ -84,3 +84,18 @@ class EffectivePartView(generics.RetrieveUpdateDestroyAPIView):
     
     def get_object(self):
         return self.get_queryset().filter(name=self.kwargs.get(self.lookup_field)).latest("date")
+
+
+class EffectivePartStructureView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = ListEffectivePartSerializer
+    lookup_field = "name"
+
+    def get_queryset(self):
+        title = self.kwargs.get("title")
+        date = self.kwargs.get("date")
+        return Part.objects.filter(title=title).filter(date__lte=date)
+    
+    def get_object(self):
+        part = self.get_queryset().filter(name=self.kwargs.get(self.lookup_field)).latest("date")
+        part.structure = part.structure['children'][0]['children'][0]['children'][0]
+        return part

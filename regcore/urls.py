@@ -85,6 +85,7 @@ from regcore.views import (
     EffectivePartView,
     EffectiveTitlesView,
     EffectivePartsView,
+    EffectivePartStructureView,
     PartsView,
 )
 
@@ -96,5 +97,6 @@ urlpatterns = urlpatterns + [
         path("<date>", EffectiveTitlesView.as_view()),
         path("<date>/title/<title>", EffectivePartsView.as_view()),
         path("<date>/title/<title>/part/<name>", EffectivePartView.as_view()),
+        path("<date>/title/<title>/part/<name>/structure", EffectivePartStructureView.as_view()),
     ]))
 ]
