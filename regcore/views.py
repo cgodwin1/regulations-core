@@ -47,7 +47,7 @@ class ListEffectivePartSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Part
-        fields = ("name", "title", "date", "last_updated", "structure")
+        fields = ("id", "name", "title", "date", "last_updated", "structure")
 
 
 class EffectiveTitlesView(generics.ListAPIView):
@@ -70,7 +70,7 @@ class EffectivePartsView(generics.ListAPIView):
 class PartSerializer(serializers.ModelSerializer):
     class Meta:
         model = Part
-        fields = "__all__"
+        fields = ("id", "name", "title", "date", "last_updated", "document", "structure", "toc")
 
 
 class EffectivePartView(generics.RetrieveUpdateDestroyAPIView):
@@ -86,16 +86,11 @@ class EffectivePartView(generics.RetrieveUpdateDestroyAPIView):
         return self.get_queryset().filter(name=self.kwargs.get(self.lookup_field)).latest("date")
 
 
-class EffectivePartStructureView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = ListEffectivePartSerializer
-    lookup_field = "name"
+class ListEffectivePartTocSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Part
+        fields = ("id", "name", "title", "date", "last_updated", "toc")
 
-    def get_queryset(self):
-        title = self.kwargs.get("title")
-        date = self.kwargs.get("date")
-        return Part.objects.filter(title=title).filter(date__lte=date)
-    
-    def get_object(self):
-        part = self.get_queryset().filter(name=self.kwargs.get(self.lookup_field)).latest("date")
-        part.structure = part.structure['children'][0]['children'][0]['children'][0]
-        return part
+
+class EffectivePartTocView(EffectivePartView):
+    serializer_class = ListEffectivePartTocSerializer
