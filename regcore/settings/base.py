@@ -16,6 +16,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'regcore',
     'regcore.search',
+    'regcore.supplementary_content',
     'regcore_read',
     'regcore_write',
 ]
