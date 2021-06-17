@@ -9,6 +9,8 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 from django.urls import path, include
 
+from django.contrib import admin
+
 from regcore.urls_utils import by_verb_url
 from regcore_read.views import diff as rdiff
 from regcore_read.views import document as rdocument
@@ -98,5 +100,6 @@ urlpatterns = urlpatterns + [
         path("<date>/title/<title>", EffectivePartsView.as_view()),
         path("<date>/title/<title>/part/<name>", EffectivePartView.as_view()),
         path("<date>/title/<title>/part/<name>/toc", EffectivePartTocView.as_view()),
+        path("admin/", admin.site.urls),
     ]))
 ]

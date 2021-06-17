@@ -10,7 +10,12 @@ ALLOWED_HOSTS = [
 ]
 
 INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.messages',
+    'django.contrib.sessions',
     'django.contrib.contenttypes',
+    'django.contrib.staticfiles',
     'mptt',
     'haystack',
     'rest_framework',
@@ -20,7 +25,14 @@ INSTALLED_APPS = [
     'regcore_read',
     'regcore_write',
 ]
-MIDDLEWARE_CLASSES = []
+
+MIDDLEWARE = [
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+]
+
+STATIC_URL = "/static/"
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', get_random_string(50))
 
@@ -41,6 +53,13 @@ DATABASES = {
 TEMPLATES = [{
     'BACKEND': 'django.template.backends.django.DjangoTemplates',
     'APP_DIRS': True,
+    'OPTIONS': {
+        'context_processors': [
+            'django.template.context_processors.request',
+            'django.contrib.auth.context_processors.auth',
+            'django.contrib.messages.context_processors.messages',
+        ]
+    }
 }]
 
 ROOT_URLCONF = 'regcore.urls'
