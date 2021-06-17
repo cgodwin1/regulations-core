@@ -1,15 +1,5 @@
-"""URLs file for Django. This will inspect the installed apps and only
-include the read/write end points that are associated with the regcore_read
-and regcore_write apps"""
-
-
-from collections import defaultdict
-
-from django.conf import settings
-from django.utils.module_loading import import_string
 from django.urls import path, include
 
-from regcore.urls_utils import by_verb_url #REMOVE
 
 from regcore.views import (
     EffectivePartView,
