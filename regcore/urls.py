@@ -1,6 +1,5 @@
 from django.urls import path, include
 
-
 from regcore.views import (
     EffectivePartView,
     EffectiveTitlesView,
@@ -8,6 +7,7 @@ from regcore.views import (
     EffectivePartTocView,
     PartsView,
 )
+
 
 urlpatterns = [
     path("v2/", include([
