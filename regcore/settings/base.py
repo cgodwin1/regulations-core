@@ -16,8 +16,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'regcore',
     'regcore.search',
-    'regcore_read',
-    'regcore_write',
 ]
 MIDDLEWARE_CLASSES = []
 
