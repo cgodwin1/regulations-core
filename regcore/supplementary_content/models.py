@@ -15,15 +15,15 @@ class Category(models.Model):
 
 class SupplementaryContent(models.Model):
     url = models.URLField(unique=True)
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    date = models.DateField()
+    title = models.CharField(max_length=200, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return self.title
+        return f'{self.date} {self.title} {self.description[:50]}...'
 
 
 class RegulationSection(models.Model):
