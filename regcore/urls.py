@@ -1,5 +1,6 @@
 from django.urls import path, include
 from django.contrib import admin
+
 from regcore.views import (
     EffectivePartView,
     EffectiveTitlesView,
@@ -12,6 +13,7 @@ from regcore.views import (
 urlpatterns = [
     path("v2/", include([
         path("", include('regcore.search.urls')),
+        path("", include('regcore.supplementary_content.urls')),
         path("", PartsView.as_view()),
         path("title/<title>/part/<name>", PartsView.as_view()),
         path("<date>", EffectiveTitlesView.as_view()),
