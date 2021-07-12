@@ -23,7 +23,11 @@ class SupplementaryContent(models.Model):
     category = models.ForeignKey(Category, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
-        return f'{self.date} {self.title} {self.description[:50]}...'
+        return f'{self.date} {self.title} {self.truncated_description}...'
+
+    @property
+    def truncated_description(self):
+        return (self.description or [])[:50]
 
 
 class RegulationSection(models.Model):
