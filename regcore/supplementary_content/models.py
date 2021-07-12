@@ -35,3 +35,6 @@ class RegulationSection(models.Model):
 
     def __str__(self):
         return f'{self.title} {self.part}.{self.section}'
+
+    class Meta:
+        unique_together = ("title", "part", "section")
